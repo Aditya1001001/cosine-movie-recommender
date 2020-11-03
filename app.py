@@ -30,7 +30,7 @@ def get_recommend(movie):
     except:
         data, similarity = create_similarity()
     if movie not in data['movie_title'].unique():
-        return('Sorry! The movie you requested is not in our database. Please check the spelling or try with some other movies')
+        return("Sorry! This movie doesn't seem to be in our database. Please check the spelling or try with another movie.")
     else:
         i = data.loc[data['movie_title']==movie].index[0]
         lst = list(enumerate(similarity[i]))
@@ -138,7 +138,7 @@ def recommend():
             movie_review_list = np.array([reviews.string])
             movie_vector = vectorizer.transform(movie_review_list)
             pred = sentiment.predict(movie_vector)
-            reviews_status.append('Good' if pred else 'Bad')
+            reviews_status.append('Positive' if pred else 'Negative')
 
     # combining reviews and comments into a dictionary
     movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}     
